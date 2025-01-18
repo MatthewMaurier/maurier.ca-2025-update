@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maurier.ca</title>
+    <meta name="description" content="Matthew Maurier's personal website.">
+    <meta name="author" content="Matthew Maurier">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <style>
+        body {
+            background-image: url('tile.jpg'); /* Use your black background image */
+            background-repeat: repeat; /* Tile the image */
+            background-color: #000000; /* Fallback black background */
+            color: #90dfee; /* Light cyan text for readability */
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            display: flex;
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            gap: 10px; /* Space between the images and text */
+            font-size: 50px;
+            margin-top: 20px;
+            color: #ffcc00; /* Bright yellow for contrast */
+        }
+        h1 img {
+            height: 50px; /* Adjust the size of the GIF */
+        }
+        .flipped {
+            transform: scaleX(-1); /* Flip the image horizontally */
+        }
+        hr {
+            border: 0;
+            border-top: 2px solid #ffcc00; /* Matching bright yellow for horizontal rule */
+            margin: 20px 0;
+        }
+        .content {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            font-size: 20px;
+            border-radius: 8px; /* Rounded corners for a softer look */
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            padding: 0px 0; /* Fixed size padding */
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none; /* Remove default bullet points */
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            color: #00ccff; /* Bright cyan for links */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ff6600; /* Orange hover effect for links */
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #999999; /* Light grey for footer text */
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <img src="computer.gif" alt="Fun Computer GIF">
+        maurier.ca
+        <img src="computer.gif" alt="Fun Computer GIF" class="flipped">
+    </h1>
+    <hr>
+    <div class="content">
+        <ul>
+            <li><a href="me.html" target="_self">- But, who?</a></li>
+            <li><a href="links.html" target="_self">- Locate me elsewhere on the world wide web</a></li>
+            <li><a href="files.html" target="_self">- Fun files</a></li>
+            <li><a href="blog.html" target="_self">- Thoughts on things</a></li>
+        </ul>
+        <hr>
+        <footer>
+            <p>© 2025 Matthew Maurier</p>
+        </footer>
+    </div>
+</body>
+</html>
