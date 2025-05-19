@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  flask-app:
+    image: python:3.11
+    container_name: flask-app
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app
+    network_mode: "host"
+    command: bash -c "pip install flask werkzeug && python app.py"
