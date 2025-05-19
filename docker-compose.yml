@@ -3,7 +3,7 @@ version: "3.9"
 services:
   flask-app:
     image: python:3.11
-    container_name: flask-app
+    container_name: maurierca
     restart: unless-stopped
     working_dir: /app
     volumes:
