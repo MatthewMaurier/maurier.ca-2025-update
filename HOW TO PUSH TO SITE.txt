@@ -1,0 +1,13 @@
+>FIRST COMMIT TO GITHUB
+
+> go into unraid console
+
+paste 
+
+cd /mnt/user/maurier.ca-2025-update
+
+>
+
+paste
+
+./deploy.sh
