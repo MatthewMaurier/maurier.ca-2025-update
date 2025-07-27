@@ -1,12 +1,12 @@
->FIRST COMMIT TO GITHUB
+1 >FIRST COMMIT TO GITHUB
 
-> go into unraid console
+2 > go into unraid console
 
 paste 
 
 cd /mnt/user/maurier.ca-2025-update
 
->
+3 >
 
 paste
 

@@ -1,1 +1,0 @@
-to deploy the site to vercel, type in 'vercel' in the terminal
