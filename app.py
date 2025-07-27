@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Set your hashed password
 VALID_USERNAME = "admin"
-HASHED_PASSWORD = 'pbkdf2:sha256:260000$HKxK41GmrqafhOzs$82fc959facaa67c084616e6a99341074a4468695a8778698aa95b9190ffee5f0'  # Replace with real hash
+HASHED_PASSWORD = 'pbkdf2:sha256:260000$IUU74iQCAMUVntHe$43cb546ad35de9245c9b50f281724c27e1b591f4e3ac2b210ba267bd0f3769ec'  # Replace with real hash
 
 ### ROUTES ###
 
