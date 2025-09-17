@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wee woo email alert</title>
+    <style>
+        body {
+            background-image: url('tile.jpg');
+            background-repeat: repeat; 
+            background-color: #000000; 
+            color: #b5d0ca; 
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            background-color: rgba(0, 0, 0, 0.8); 
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 8px; 
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #ffcc00; 
+        }
+        hr {
+            border: 0;
+            border-top: 2px solid #ffcc00;
+            margin: 20px 0;
+        }
+        p {
+            text-align: left; 
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        a {
+            color: #00ccff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ff6600; 
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #999999; 
+        }
+    </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Contact</h1>
+    <hr>
+
+    <p>
+      Professional:
+      <a href="mailto:mmaurier@ualberta.ca">mmaurier@ualberta.ca</a><span class="copy-link" onclick="copyEmail(this, 'mmaurier@ualberta.ca')">copy to clipboard</span>
+    </p>
+
+    <p>
+      Personal:
+      <a href="mailto:mwmaurier@gmail.com">mwmaurier@gmail.com</a>
+      <span class="copy-link" onclick="copyEmail(this, 'mwmaurier@gmail.com')">copy to clipboard</span>
+    </p>
+
+
+    <p><a href="index.html">← home</a></p>
+
+    <hr>
+    <footer>
+      <p>© 2025 Matthew Maurier</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyEmail(element, email) {
+      navigator.clipboard.writeText(email).then(() => {
+        element.textContent = "copied!";
+        setTimeout(() => {
+          element.textContent = "copy to clipboard";
+        }, 2000); // change back after 2 seconds
+      }).catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+    }
+  </script>
+
+  <style>
+    .copy-link {
+      color: #0078d7;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 8px;
+    }
+    .copy-link:hover {
+      color: #005fa3;
+    }
+  </style>
+</body>
+
+
+</html>
