@@ -105,8 +105,35 @@
             margin-top: 20px;
             color: #999999; 
         }
+        #passion {
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #ccccff;
+        cursor: pointer;
+        position: relative;
+        user-select: none;
+
+        /* glorious 2000s glow */
+        text-shadow: 0 0 6px #000fff, 0 0 1px #ff00ff, 0 0 18px #ffff00;
+        }
+
+#passion img {
+  height: 60px;
+  vertical-align: middle;
+  margin: 0px;
+  image-rendering: pixelated; /* harmless, adds vibe when applicable */
+}
+
+#passion span {
+  display: inline-block; /* lets rotation apply nicely */
+}
+
+
     </style>
 </head>
+
 <body>
     <h1>
         <img src="computer.gif" alt="_">
@@ -118,16 +145,73 @@
         <ul>
 
         <p>
-        Hello. My name is Matt. Please enjoy your stay on my lovely website. I made it just for you.
+        Hello. My name is Matt. Please enjoy your stay on my lovely website.
         </p>
+<div id="passion">
+  <img src="fire.gif" alt="fire">
+  <span>HTML is my passion</span>
+  <img src="fire.gif" alt="fire">
+</div>
+
         <li><a href="contact.html" target="_self">- Contact me</a></li>    
         <li><a href="links.html" target="_self">- Locate me elsewhere on the world wide web</a></li>
         <li><a href="/archive" target="_self">- Matt's eternal archive</a></li>
         <hr>
+
         <footer>
             <p>© 2026 Matthew Maurier</p>
         </footer>
     </div>
+
+<script>
+  const passion = document.getElementById("passion");
+  const passionText = passion ? passion.querySelector("span") : null;
+
+  if (!passion || !passionText) {
+    console.warn("passion element not found");
+  } else {
+    let colors = ["#ffcccc,#ff00ff", "#00ffff", "#ffff00", "#ff6600", "#00ff00", "#ffffff"];
+    let colorIndex = 0;
+    let interval = null;
+    let angle = 0;
+
+    passion.addEventListener("mouseenter", () => {
+      interval = setInterval(() => {
+        // cycle colors
+        passionText.style.color = colors[colorIndex % colors.length];
+        colorIndex++;
+
+        // shake
+        const x = Math.random() * 10 - 5;
+        const y = Math.random() * 10 - 5;
+
+        // rotate (slightly chaotic)
+        angle += (Math.random() * 14 - 7); // random spin step
+        passionText.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+      }, 70);
+    });
+
+    passion.addEventListener("mouseleave", () => {
+      clearInterval(interval);
+      interval = null;
+      angle = 0;
+      passionText.style.transform = "translate(0, 0) rotate(0deg)";
+      passionText.style.color = "#ccccff";
+    });
+
+    passion.addEventListener("mousemove", (e) => {
+      const rect = passion.getBoundingClientRect();
+      const offsetX = (e.clientX - rect.left - rect.width / 2) / 18;
+      const offsetY = (e.clientY - rect.top - rect.height / 2) / 18;
+
+      // gentle follow + slight tilt toward cursor
+      const tilt = (offsetX + offsetY) * 2;
+      passionText.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${tilt}deg)`;
+    });
+  }
+</script>
+
+
 </body>
 <style>
   .content {
