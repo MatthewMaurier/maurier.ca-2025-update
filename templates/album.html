@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ album }}</title>
+  <style>
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ album }}</h1>
+
+  {% for img in images %}
+    <img src="/photos/{{ album }}/{{ img }}">
+  {% endfor %}
+
+  <p><a href="/gallery">← back</a></p>
+</body>
+</html>

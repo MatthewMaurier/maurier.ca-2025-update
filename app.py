@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect, make_response, render_template, send_from_directory
+from flask import Flask, request, redirect, make_response, render_template, send_from_directory, abort
+from pathlib import Path
 from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
@@ -57,5 +58,46 @@ def logout():
     resp.set_cookie("admin", "", expires=0)
     return resp
 
+
+PHOTO_ROOT = Path("/data/photos").resolve()
+IMG_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+
+@app.route("/gallery")
+def gallery_index():
+    albums = sorted(
+        p.name for p in PHOTO_ROOT.iterdir()
+        if p.is_dir()
+    )
+    return render_template("gallery.html", albums=albums)
+
+@app.route("/gallery/<album>")
+def gallery_album(album):
+    album_path = (PHOTO_ROOT / album).resolve()
+    if not album_path.is_dir() or not str(album_path).startswith(str(PHOTO_ROOT)):
+        abort(404)
+
+    images = sorted(
+        p.name for p in album_path.iterdir()
+        if p.suffix.lower() in IMG_EXTS
+    )
+
+    return render_template(
+        "album.html",
+        album=album,
+        images=images
+    )
+
+@app.route("/photos/<album>/<filename>")
+def photo(album, filename):
+    album_path = (PHOTO_ROOT / album).resolve()
+    if not str(album_path).startswith(str(PHOTO_ROOT)):
+        abort(404)
+    return send_from_directory(album_path, filename)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
+
+
