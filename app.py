@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, make_response, render_template, send_from_directory, abort
 from pathlib import Path
+from urllib.parse import quote
 from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
@@ -59,40 +60,48 @@ def logout():
     return resp
 
 
-PHOTO_ROOT = Path("/data/photos").resolve()
+PHOTO_ROOT = Path("archive_files").resolve()
+
 IMG_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+VID_EXTS = {".mp4", ".webm", ".mov", ".m4v", ".ogg"}  # ogg can be video too
 
-@app.route("/gallery")
+def file_kind(path: Path) -> str:
+    ext = path.suffix.lower()
+    if ext in IMG_EXTS:
+        return "image"
+    if ext in VID_EXTS:
+        return "video"
+    return "other"
+
+@app.route("/archive")
 def gallery_index():
-    albums = sorted(
-        p.name for p in PHOTO_ROOT.iterdir()
-        if p.is_dir()
-    )
-    return render_template("gallery.html", albums=albums)
+    albums = sorted(p.name for p in PHOTO_ROOT.iterdir() if p.is_dir())
+    return render_template("archive.html", albums=albums)
 
-@app.route("/gallery/<album>")
+@app.route("/archive/<album>")
 def gallery_album(album):
     album_path = (PHOTO_ROOT / album).resolve()
     if not album_path.is_dir() or not str(album_path).startswith(str(PHOTO_ROOT)):
         abort(404)
 
-    images = sorted(
-        p.name for p in album_path.iterdir()
-        if p.suffix.lower() in IMG_EXTS
-    )
+    # include ALL files (images, videos, and other)
+    items = []
+    for p in sorted(album_path.iterdir(), key=lambda x: x.name.lower()):
+        if p.is_file():
+            items.append({
+                "name": p.name,
+                "kind": file_kind(p),
+                "url_name": quote(p.name)  # safe for spaces/#/etc in URLs
+            })
 
-    return render_template(
-        "album.html",
-        album=album,
-        images=images
-    )
+    return render_template("album.html", album=album, items=items)
 
-@app.route("/photos/<album>/<filename>")
-def photo(album, filename):
+@app.route("/archive/<album>/<path:filename>")
+def file_serve(album, filename):
     album_path = (PHOTO_ROOT / album).resolve()
     if not str(album_path).startswith(str(PHOTO_ROOT)):
         abort(404)
-    return send_from_directory(album_path, filename)
+    return send_from_directory(album_path, filename, as_attachment=False)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
