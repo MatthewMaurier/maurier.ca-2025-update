@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>gallery</title>
+<style>
+body {
+    background: black;
+    color: #b5d0ca;
+    font-family: "Times New Roman", serif;
+}
+img {
+    width: 300px;
+    margin: 10px;
+    border: 2px solid #ffcc00;
+}
+</style>
+</head>
+<body>
+
+<h1>gallery</h1>
+<div id="gallery"></div>
+
+<script>
+fetch('./')
+  .then(r => r.text())
+  .then(html => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    [...doc.links].forEach(link => {
+      if (link.href.match(/\.(jpg|png|gif|webp)$/i)) {
+        const img = document.createElement('img');
+        img.src = link.getAttribute('href');
+        document.getElementById('gallery').appendChild(img);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
