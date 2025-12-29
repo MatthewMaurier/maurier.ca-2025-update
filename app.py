@@ -95,9 +95,6 @@ def photo(album, filename):
     return send_from_directory(album_path, filename)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-
-if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 
 
